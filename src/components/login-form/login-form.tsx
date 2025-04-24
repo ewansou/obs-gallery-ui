@@ -33,9 +33,7 @@ export const LoginForm = () => {
 
   const onSubmit: () => void = form.handleSubmit(
     async ({ password }: z.infer<typeof PasswordSchema>) => {
-      console.log("values:", password);
       const response = await login(password);
-      console.log(response);
       if (response?.error) toast.error(response.error);
     }
   );
