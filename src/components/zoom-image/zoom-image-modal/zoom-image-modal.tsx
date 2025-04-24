@@ -1,10 +1,13 @@
 import Image from "next/image";
-import { cn } from "@/lib/utils";
+import { cn, handleDownload } from "@/lib/utils";
 import React, { useEffect } from "react";
 import { ZoomImageModalProps } from "./types";
+import { Button } from "@/components/ui/button";
+import { DownloadIcon } from "lucide-react";
 
 const ZoomImageModal = ({
   src,
+  fileName,
   width,
   height,
   transition,
@@ -16,25 +19,28 @@ const ZoomImageModal = ({
   }, [onChangeTransition]);
 
   return (
-    <div
-      className="modal-backdrop fixed inset-0 z-50 flex h-dvh w-dvw"
-      onClick={onClose(false)}
-      onWheel={onClose(false)}
-    >
-      <div className="relative flex size-full items-center justify-center">
+    <div className="modal-backdrop fixed inset-0 z-50 flex h-dvh w-dvw overflow-y-scroll">
+      <div className="relative flex flex-col size-full items-center justify-center gap-5 py-20">
         <Image
           src={src}
           width={width}
           height={height}
           alt="preview"
           className={cn(
-            "absolute origin-center cursor-zoom-out max-h-dvh transition duration-300 scale-50 opacity-20",
+            "object-contain origin-center cursor-zoom-out max-h-dvh transition duration-300 scale-50 opacity-20",
             {
-              "scale-100 opacity-100": transition,
+              "scale-100 w-[95vw] opacity-100": transition,
             }
           )}
           onClick={onClose(false)}
         />
+        <Button
+          size={"icon"}
+          className="!size-12 !p-0"
+          onClick={() => handleDownload({ fileName, publicUrl: src })}
+        >
+          <DownloadIcon className="size-5" />
+        </Button>
       </div>
       <button
         aria-label="Minimize image"

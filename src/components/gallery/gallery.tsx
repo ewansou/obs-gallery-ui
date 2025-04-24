@@ -13,6 +13,7 @@ export const Gallery: React.FC<Props> = ({ photos }) => {
       {photos?.map(({ publicUrl, fileName }) => (
         <ZoomImage
           key={fileName}
+          fileName={fileName}
           image={
             <Image
               src={publicUrl}

@@ -9,6 +9,7 @@ import ZoomImageModal from "./zoom-image-modal";
 
 const ZoomImage: FC<ZoomImageProps> = ({
   image,
+  fileName,
   className,
   hightSrcResolution,
 }) => {
@@ -26,6 +27,7 @@ const ZoomImage: FC<ZoomImageProps> = ({
         createPortal(
           <ZoomImageModal
             src={hightSrcResolution ?? image.props.src}
+            fileName={fileName}
             width={image.props.width}
             height={image.props.height}
             transition={transition}
