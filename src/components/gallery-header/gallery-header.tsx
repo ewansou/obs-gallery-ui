@@ -1,32 +1,19 @@
-"use client";
+
 import React from "react";
 import Image from "next/image";
-import { Button } from "../ui/button";
-import { ROUTES } from "@/lib/routes";
-import { HomeIcon } from "lucide-react";
-import { useRouter } from "next/navigation";
-import { deleteAuthCredentials } from "@/lib/auth-utils";
+import Logo from "../../../public/assets/obs-logo.png";
 
 export const GalleryHeader = () => {
-  const router = useRouter();
+
   return (
-    <div className="fixed container inset-0 w-full bg-white border-b border-neutral-100 h-fit items-center flex justify-center">
-      <Button
-        variant={"outline"}
-        onClick={() => {
-          deleteAuthCredentials();
-          router.replace(ROUTES.LOGIN);
-        }}
-      >
-        <HomeIcon className="w-12 h-12" />
-      </Button>
+    <div className="fixed top-0 left-0 w-full bg-white border-b border-neutral-100 z-50 py-6 flex items-center justify-center">
       <Image
-        src={"/assets/OBS_Brand.webp"}
-        width={400}
-        height={400}
+        src={Logo.src}
+        width={Logo.width}
+        height={Logo.height}
         alt="OBS Brand Logo"
         loading="lazy"
-        className="object-contain max-h-56 flex-1"
+        className="object-contain h-20"
       />
     </div>
   );

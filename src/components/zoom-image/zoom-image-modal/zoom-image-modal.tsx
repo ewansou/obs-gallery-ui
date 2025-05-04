@@ -8,55 +8,70 @@ import { DownloadIcon } from "lucide-react";
 const ZoomImageModal = ({
   src,
   fileName,
-  width,
-  height,
   transition,
   onClose,
   onChangeTransition,
 }: ZoomImageModalProps) => {
+
   useEffect(() => {
     onChangeTransition(true);
+    document.body.style.overflow = "hidden";
+    document.documentElement.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.overflow = "";
+      document.documentElement.style.overflow = "";
+    };
   }, [onChangeTransition]);
 
   return (
-    <div className="modal-backdrop fixed inset-0 z-50 flex h-dvh w-dvw overflow-y-scroll">
-      <div className="relative flex flex-col size-full items-center justify-center gap-5 py-20">
+    <div className="modal-backdrop fixed inset-0 z-50 flex items-center justify-center bg-black/80 px-4">
+      <div className="relative flex flex-col items-center justify-center gap-5 py-10 md:py-20 max-h-screen overflow-y-auto bg-white rounded-xl px-6">
         <Image
           src={src}
-          width={width}
-          height={height}
           alt="preview"
+          width={0}
+          height={0}
+          sizes="100vw"
           className={cn(
-            "object-contain origin-center cursor-zoom-out max-h-dvh transition duration-300 scale-50 opacity-20",
+            "w-auto h-auto object-contain cursor-zoom-out max-w-[80vw] max-h-[75vh] transition duration-300",
             {
-              "scale-100 w-[95vw] opacity-100": transition,
+              "scale-100 opacity-100": transition,
+              "scale-95 opacity-0": !transition,
             }
           )}
           onClick={onClose(false)}
         />
+
+        <p className="text-sm text-black text-center max-w-md mt-10">
+          On some mobile devices, you can long-press the image to save it to your gallery. Give it a try!<br /><br />
+          If that doesn't work, tap the button below to download and save the photo.
+          Depending on your device, the photo may appear in your browser's downloads or photo gallery.
+        </p>
+
         <Button
-          size={"icon"}
-          className="!size-12 !p-0"
           onClick={() => handleDownload({ fileName, publicUrl: src })}
+          className="px-4 py-2 text-sm mb-4 mt-4"
         >
-          <DownloadIcon className="size-5" />
+          <DownloadIcon className="w-4 h-4 mr-2" />
+          Download
         </Button>
       </div>
+
       <button
         aria-label="Minimize image"
-        className="absolute right-[20px] top-[20px] size-[40px] cursor-zoom-out touch-manipulation appearance-none rounded-full border-0 bg-black/70 p-[9px] text-white"
+        className="absolute right-5 top-5 size-10 cursor-zoom-out appearance-none rounded-full bg-black/70 p-2 text-white"
         onClick={onClose(false)}
         type="button"
       >
         <svg
           aria-hidden="true"
-          data-rmiz-btn-unzoom-icon="true"
           fill="currentColor"
           focusable="false"
           viewBox="0 0 16 16"
           xmlns="http://www.w3.org/2000/svg"
         >
-          <path d="M 14.144531 1.148438 L 9 6.292969 L 9 3 L 8 3 L 8 8 L 13 8 L 13 7 L 9.707031 7 L 14.855469 1.851563 Z M 8 8 L 3 8 L 3 9 L 6.292969 9 L 1.148438 14.144531 L 1.851563 14.855469 L 7 9.707031 L 7 13 L 8 13 Z"></path>
+          <path d="M14.144531 1.148438L9 6.292969V3H8v5h5V7H9.707031l5.148438-5.148437zM8 8H3v1h3.292969L1.148438 14.144531l.703125.710938L7 9.707031V13h1z" />
         </svg>
       </button>
     </div>

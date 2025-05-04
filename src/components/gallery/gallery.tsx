@@ -9,21 +9,25 @@ type Props = {
 
 export const Gallery: React.FC<Props> = ({ photos }) => {
   return (
-    <ul className="grid sm:grid-cols-2 gap-5">
+    <ul className="columns-1 sm:columns-2 lg:columns-3 gap-4 space-y-4">
       {photos?.map(({ publicUrl, fileName }) => (
-        <ZoomImage
-          key={fileName}
-          fileName={fileName}
-          image={
-            <Image
-              src={publicUrl}
-              alt={fileName}
-              className="object-cover h-full"
-              width={600}
-              height={600}
-            />
-          }
-        />
+        <li key={fileName} className="break-inside-avoid overflow-hidden rounded shadow">
+          <ZoomImage
+            key={fileName}
+            fileName={fileName}
+            hightSrcResolution={publicUrl} // Use original URL here
+            image={
+              <Image
+                src={publicUrl}
+                alt={fileName}
+                className="w-full h-auto object-cover rounded"
+                width={0}
+                height={0}
+                sizes="100vw"
+              />
+            }
+          />
+        </li>
       ))}
     </ul>
   );

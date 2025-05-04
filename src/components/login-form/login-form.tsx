@@ -20,6 +20,7 @@ import {
   CardContent,
   CardFooter,
   CardHeader,
+  CardDescription,
   CardTitle,
 } from "@/components/ui/card";
 
@@ -40,24 +41,28 @@ export const LoginForm = () => {
 
   return (
     <Form {...form}>
-      <form action={onSubmit} className="mt-8">
-        <Card>
+      <form action={onSubmit} className="w-full flex justify-center">
+        <Card className="w-full max-w-[500px] mb-10">
           <CardHeader>
-            <CardTitle className="text-xl">
-              Enter password to view photos:
+            <CardTitle className="text-2xl text-left font-semibold">
+              Enter gallery password
             </CardTitle>
+            <CardDescription className="text-left">
+              Enter your group's gallery password to view phots
+            </CardDescription>
           </CardHeader>
-          <CardContent>
-            <div className="space-y-4">
+          <CardContent className="mt-5">
+            <div className="flex flex-col sm:flex-row gap-4 w-full items-start sm:items-end">
               <FormField
                 control={form.control}
                 name="password"
                 render={({ field }) => (
-                  <FormItem className="flex-1">
+                  <FormItem className="w-full sm:flex-1">
                     <FormControl>
                       <Input
                         type="password"
                         placeholder="Password"
+                        className="w-full"
                         {...field}
                       />
                     </FormControl>
@@ -65,15 +70,13 @@ export const LoginForm = () => {
                   </FormItem>
                 )}
               />
+              <SubmitButton
+                className="w-full sm:w-auto sm:min-w-[120px]"
+                text="Submit"
+                loadingMessage="Loading..."
+              />
             </div>
           </CardContent>
-          <CardFooter className="flex items-center justify-end gap-3">
-            <SubmitButton
-              className="max-w-[150px] w-full"
-              text={"Login"}
-              loadingMessage="Login..."
-            />
-          </CardFooter>
         </Card>
       </form>
     </Form>
