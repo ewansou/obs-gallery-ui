@@ -18,7 +18,6 @@ import {
 import {
   Card,
   CardContent,
-  CardFooter,
   CardHeader,
   CardDescription,
   CardTitle,
@@ -48,7 +47,7 @@ export const LoginForm = () => {
               Enter gallery password
             </CardTitle>
             <CardDescription className="text-left">
-              Enter your group's gallery password to view phots
+              Enter your group&apos;s gallery password to view phots
             </CardDescription>
           </CardHeader>
           <CardContent className="mt-5">

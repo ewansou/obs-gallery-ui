@@ -45,8 +45,8 @@ const ZoomImageModal = ({
 
         <p className="text-sm text-black text-center max-w-md mt-10">
           On some mobile devices, you can long-press the image to save it to your gallery. Give it a try!<br /><br />
-          If that doesn't work, tap the button below to download and save the photo.
-          Depending on your device, the photo may appear in your browser's downloads or photo gallery.
+          If that doesn&apos;t work, tap the button below to download and save the photo.
+          Depending on your device, the photo may appear in your browser&apos;s downloads or photo gallery.
         </p>
 
         <Button
