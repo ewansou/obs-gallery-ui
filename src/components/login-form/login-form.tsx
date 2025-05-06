@@ -47,7 +47,7 @@ export const LoginForm = () => {
               Enter gallery password
             </CardTitle>
             <CardDescription className="text-left">
-              Enter your group&apos;s gallery password to view phots
+              Enter your group&apos;s gallery password to view photos
             </CardDescription>
           </CardHeader>
           <CardContent className="mt-5">
