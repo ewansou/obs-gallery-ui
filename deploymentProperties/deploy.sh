@@ -11,7 +11,7 @@ ZIP_FILE_NAME="$APP_NAME.zip"
 LOCAL_ZIP="/Users/ewansou/VSCodeProjects/instantly_ui/$ZIP_FILE_NAME"
 REMOTE_DIR="/home/ec2-user/$APP_NAME"
 EC2_USER="ec2-user"
-EC2_HOST="server.highlightsfromyourevent.com"
+EC2_HOST="ec2-47-130-40-112.ap-southeast-1.compute.amazonaws.com"
 PEM_PATH="/Users/ewansou/AWS/EC2/instantly.pem"
 
 # === PACKAGE ===
