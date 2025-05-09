@@ -2,12 +2,12 @@ type ApiResponseType =
   | { success: string; error?: undefined }
   | { error: string; success?: undefined };
 
-interface PhotoType {
+export interface PhotoType {
   fileName: string;
   publicUrl: string;
 }
 
-interface PhotosListType {
+export interface PhotosListType {
   userName: string;
   userEmail: string;
   courseName: string;

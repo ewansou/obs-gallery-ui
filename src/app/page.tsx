@@ -1,24 +1,58 @@
-import React from "react";
-import { Metadata } from "next";
+"use client";
+
+import React, { useEffect, useState } from "react";
 import Gallery from "@/components/gallery";
 import GalleryHeader from "@/components/gallery-header";
 import { getAllPhotosViaUploadId } from "@/queries/gallery.query";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import HomeButton from "@/components/home-button"; 
+import HomeButton from "@/components/home-button";
+import { PhotosListType } from "../../typing.t";
+import Loading from "@/components/ui/loading";
+import { deleteAuthCredentials } from "@/lib/auth-utils";
+import { useRouter } from "next/navigation";
+import { ROUTES } from "@/lib/routes";
 
-export const metadata: Metadata = {
-  title: "Gallery | Outward Bound Singapore",
-};
+const GalleryPage = () => {
+  const [data, setData] = useState<PhotosListType | null>(null);
+  const [loading, setLoading] = useState(true);
+  const router = useRouter();
 
-const GalleryPage = async () => {
-  const data = await getAllPhotosViaUploadId();
+  useEffect(() => {
+    getAllPhotosViaUploadId()
+      .then((result) => {
+        console.log("[GalleryPage] Result from getAllPhotosViaUploadId:", result);
+
+        const isInvalidCourseData =
+          !result ||
+          !result.courseName ||
+          !result.courseDate ||
+          !result.groupName;
+
+        if (isInvalidCourseData) {
+          console.warn("[GalleryPage] Missing course info. Redirecting to login.");
+          deleteAuthCredentials();
+          router.replace(ROUTES.LOGIN);
+          return;
+        }
+
+        setData(result);
+      })
+      .finally(() => setLoading(false));
+  }, [router]);
+
+  if (loading) {
+    return (
+      <main className="w-screen min-h-screen flex items-center justify-center bg-neutral-100">
+        <Loading />
+      </main>
+    );
+  }
 
   return (
     <main className="w-screen min-h-screen bg-neutral-100">
       <GalleryHeader />
 
       <div className="container pt-40 pb-20">
-        {/* Wrapper Card */}
         <Card className="w-full border border-neutral-200 shadow-md p-8">
           <div className="flex flex-col gap-10">
             <HomeButton />
@@ -28,15 +62,9 @@ const GalleryPage = async () => {
                 <h2 className="text-xl font-semibold">Course Information</h2>
               </CardHeader>
               <CardContent className="flex flex-col gap-3 text-sm md:text-base">
-                <p>
-                  <strong>Course Name:</strong> {data?.courseName}
-                </p>
-                <p>
-                  <strong>Course Date:</strong> {data?.courseDate}
-                </p>
-                <p>
-                  <strong>Group Name:</strong> {data?.groupName}
-                </p>
+                <p><strong>Course Name:</strong> {data?.courseName}</p>
+                <p><strong>Course Date:</strong> {data?.courseDate}</p>
+                <p><strong>Group Name:</strong> {data?.groupName}</p>
               </CardContent>
             </Card>
 
