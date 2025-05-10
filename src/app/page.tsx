@@ -6,7 +6,6 @@ import GalleryHeader from "@/components/gallery-header";
 import { getAllPhotosViaUploadId } from "@/queries/gallery.query";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import HomeButton from "@/components/home-button";
-import { PhotosListType } from "../../typing.t";
 import Loading from "@/components/ui/loading";
 import { deleteAuthCredentials } from "@/lib/auth-utils";
 import { useRouter } from "next/navigation";

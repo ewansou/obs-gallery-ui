@@ -1,7 +1,6 @@
 import { API_ENDPOINTS } from "@/lib/api-endpoints";
 import { getAuthCredentials } from "@/lib/auth-utils";
 import { BASE_URL, revalidate } from "@/lib/constants";
-import { PhotosListType } from "../../typing.t";
 
 export const getAllPhotosViaUploadId = async (): Promise<
   PhotosListType | undefined

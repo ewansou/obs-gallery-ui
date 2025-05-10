@@ -3,7 +3,6 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import ZoomImage from "../zoom-image";
-import { PhotoType } from "../../../typing.t";
 
 type Props = {
   photos: PhotoType[] | undefined;
