@@ -7,7 +7,6 @@ import { getAllPhotosViaUploadId } from "@/queries/gallery.query";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import HomeButton from "@/components/home-button";
 import Loading from "@/components/ui/loading";
-import { deleteAuthCredentials } from "@/lib/auth-utils";
 import { useRouter } from "next/navigation";
 import { ROUTES } from "@/lib/routes";
 
@@ -20,20 +19,23 @@ const GalleryPage = () => {
     getAllPhotosViaUploadId()
       .then((result) => {
         console.log("[GalleryPage] Result from getAllPhotosViaUploadId:", result);
-
+  
         const isInvalidCourseData =
-          !result ||
-          !result.courseName ||
-          !result.courseDate ||
-          !result.groupName;
-
+          !result || !result.courseName || !result.courseDate || !result.groupName;
+  
         if (isInvalidCourseData) {
           console.warn("[GalleryPage] Missing course info. Redirecting to login.");
-          deleteAuthCredentials();
-          router.replace(ROUTES.LOGIN);
+  
+          fetch("/api/logout", {
+            method: "GET",
+            credentials: "include",
+          }).then(() => {
+            router.replace(ROUTES.LOGIN);
+          });
+  
           return;
         }
-
+  
         setData(result);
       })
       .finally(() => setLoading(false));
