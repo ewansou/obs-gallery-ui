@@ -2,6 +2,7 @@
 
 import { Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { BASE_URL } from "@/lib/constants";
 
 type Props = {
     uploadId: string;
@@ -9,8 +10,7 @@ type Props = {
 
 const DownloadAllButton: React.FC<Props> = ({ uploadId }) => {
 const handleDownloadAll = () => {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
-  const url = `${baseUrl}/gallery/public/download-all?uploadid=${uploadId}`;
+  const url = `${BASE_URL}/gallery/public/download-all?uploadid=${uploadId}`;
   window.open(url, "_blank");
 };
 
