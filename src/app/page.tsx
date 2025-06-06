@@ -18,7 +18,7 @@ export default async function GalleryPage() {
   const data = await getAllPhotosViaUploadId(uploadId);
 
   const isInvalidCourseData =
-    !data || !data.courseName || !data.courseDate || !data.groupName;
+    !data || !data.courseName || !data.courseDate || !data.groupName || !data.galleryExpiryDate;
 
   if (isInvalidCourseData) {
     console.warn("[GalleryPage] Missing course info, redirecting to login.");
@@ -35,17 +35,18 @@ export default async function GalleryPage() {
             <HomeButton />
 
             <Card className="border border-neutral-200 shadow-sm">
-              <CardHeader>
+              <CardHeader className="flex flex-row items-center justify-between">
                 <h2 className="text-xl font-semibold">Course Information</h2>
               </CardHeader>
               <CardContent className="flex flex-col gap-3 text-sm md:text-base">
                 <p><strong>Course Name:</strong> {data.courseName}</p>
                 <p><strong>Course Date:</strong> {data.courseDate}</p>
+                <p><strong>Gallery Expiry Date:</strong> {data.galleryExpiryDate}</p>
                 <p><strong>Group Name:</strong> {data.groupName}</p>
               </CardContent>
             </Card>
 
-            <Gallery photos={data.photos} />
+            <Gallery photos={data.photos} uploadId={uploadId}/>
           </div>
         </Card>
       </div>

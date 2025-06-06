@@ -3,12 +3,14 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import ZoomImage from "../zoom-image";
+import DownloadAllButton from "../download-all-button";
 
 type Props = {
   photos: PhotoType[] | undefined;
+  uploadId: string;
 };
 
-export const Gallery: React.FC<Props> = ({ photos }) => {
+export const Gallery: React.FC<Props> = ({ photos, uploadId }) => {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -25,17 +27,22 @@ export const Gallery: React.FC<Props> = ({ photos }) => {
   }
 
   return (
-    <ul
-      className={`columns-1 sm:columns-2 lg:columns-3 gap-4 space-y-4 transition-opacity duration-700 ease-in ${
-        visible ? "opacity-100" : "opacity-0"
-      }`}
-    >
-      {photos.map(({ publicUrl, fileName }) => (
-        <li key={fileName} className="break-inside-avoid overflow-hidden rounded shadow relative">
-          <ImageWithSkeleton src={publicUrl} alt={fileName} />
-        </li>
-      ))}
-    </ul>
+    <>
+      <div className="flex justify-end">
+        <DownloadAllButton uploadId={uploadId} />
+      </div>
+
+      <ul
+        className={`columns-1 sm:columns-2 lg:columns-3 gap-4 space-y-4 transition-opacity duration-700 ease-in ${visible ? "opacity-100" : "opacity-0"
+          }`}
+      >
+        {photos.map(({ publicUrl, fileName }) => (
+          <li key={fileName} className="break-inside-avoid overflow-hidden rounded shadow relative">
+            <ImageWithSkeleton src={publicUrl} alt={fileName} />
+          </li>
+        ))}
+      </ul>
+    </>
   );
 };
 

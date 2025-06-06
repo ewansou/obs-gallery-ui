@@ -14,6 +14,7 @@
   courseDate: string;
   groupName: string;
   galleryPassword: string;
+  galleryExpiryDate: string;
   photoSelected: string;
   photos: Array<PhotoType>;
   currentPage: number;
