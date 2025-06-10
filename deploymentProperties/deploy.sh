@@ -50,8 +50,8 @@ ssh -i "$PEM_PATH" "$EC2_USER@$EC2_HOST" << EOF
   echo "Building Next.js app..."
   npm run build
 
-  echo "Starting app in background with nohup..."
-  nohup bash -c "PORT=3001 npm start" > output.log 2>&1 &
+  echo "Starting obs-gallery-ui on port 3001 in background with nohup..."
+  nohup env PORT=3001 npm run start > output.log 2>&1 &
 
   # Delete the uploaded zip
   rm -f ~/$ZIP_FILE_NAME
