@@ -12,6 +12,7 @@
   userEmail: string;
   courseName: string;
   courseDate: string;
+  campus: string;
   groupName: string;
   galleryPassword: string;
   galleryExpiryDate: string;
