@@ -1,7 +1,7 @@
 
 import React from "react";
 import Image from "next/image";
-import Logo from "../../../public/assets/obs-logo.png";
+import Logo from "../../../public/assets/obs-nyc-logo.png";
 
 export const GalleryHeader = () => {
 

@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 import { Metadata } from "next";
 import LoginForm from "@/components/login-form";
-import Logo from "../../../public/assets/obs-logo.png";
+import Logo from "../../../public/assets/obs-nyc-logo.png";
 
 export const metadata: Metadata = {
   title: "Login | Outward Bound Singapore",
