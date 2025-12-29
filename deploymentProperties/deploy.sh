@@ -32,7 +32,7 @@ ssh -i "$PEM_PATH" "$EC2_USER@$EC2_HOST" << EOF
   # Kill existing Next.js process if port 3001 is in use
   PID=\$(sudo netstat -tulnp 2>/dev/null | grep ':3001' | awk '{print \$7}' | cut -d'/' -f1)
   if [ -n "\$PID" ]; then
-    echo "Killing process on port 3000 (PID: \$PID)..."
+    echo "Killing process on port 3001 (PID: \$PID)..."
     sudo kill -9 \$PID
   fi
 
